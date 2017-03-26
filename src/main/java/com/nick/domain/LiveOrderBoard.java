@@ -33,9 +33,8 @@ public class LiveOrderBoard {
                         .withPrice(price)
                         .withQuanity(sumQuantitiesFor(ordersGroupedByPrice.get(price)))
                         .build())
+                .sorted(comparingPriceFor(orderType))
                 .collect(toList());
-
-        mergedOrders.sort(comparingPriceFor(orderType));
 
         return mergedOrders;
     }
