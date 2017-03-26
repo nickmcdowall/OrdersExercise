@@ -28,15 +28,13 @@ public class LiveOrderBoard {
 
         Set<Long> distinctPrices = ordersGroupedByPrice.keySet();
 
-        List<OrderMerge> mergedOrders = distinctPrices.stream()
+        return distinctPrices.stream()
                 .map(price -> anOrderMerge()
                         .withPrice(price)
                         .withQuanity(sumQuantitiesFor(ordersGroupedByPrice.get(price)))
                         .build())
                 .sorted(comparingPriceFor(orderType))
                 .collect(toList());
-
-        return mergedOrders;
     }
 
     public void cancel(Order order) {
